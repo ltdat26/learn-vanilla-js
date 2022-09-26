@@ -1,5 +1,3 @@
-// ****** select items **********
-
 const form = document.querySelector(".grocery-form");
 const alert = document.querySelector(".alert");
 const grocery = document.getElementById("grocery");
@@ -7,12 +5,9 @@ const submitBtn = document.querySelector(".submit-btn");
 const container = document.querySelector(".grocery-container");
 const list = document.querySelector(".grocery-list");
 const clearBtn = document.querySelector(".clear-btn");
-// edit option
 let editElement;
 let editFlag = false;
 let editID = "";
-// ****** event listeners **********
-
 // submit form
 form.addEventListener("submit", addItem);
 // clear list
@@ -83,7 +78,6 @@ function displayAlert(text, action) {
     alert.classList.remove(`alert-${action}`);
   }, 1000);
 }
-
 // clear items
 function clearItems() {
   const items = document.querySelectorAll(".grocery-item");
@@ -97,9 +91,7 @@ function clearItems() {
   setBackToDefault();
   localStorage.removeItem("list");
 }
-
 // delete item
-
 function deleteItem(e) {
   const element = e.currentTarget.parentElement.parentElement;
   const id = element.dataset.id;
@@ -127,16 +119,14 @@ function editItem(e) {
   //
   submitBtn.textContent = "edit";
 }
-// set backt to defaults
+// set back to defaults
 function setBackToDefault() {
   grocery.value = "";
   editFlag = false;
   editID = "";
   submitBtn.textContent = "submit";
 }
-
 // ****** local storage **********
-
 // add to local storage
 function addToLocalStorage(id, value) {
   const grocery = { id, value };
@@ -144,13 +134,11 @@ function addToLocalStorage(id, value) {
   items.push(grocery);
   localStorage.setItem("list", JSON.stringify(items));
 }
-
 function getLocalStorage() {
   return localStorage.getItem("list")
     ? JSON.parse(localStorage.getItem("list"))
     : [];
 }
-
 function removeFromLocalStorage(id) {
   let items = getLocalStorage();
 
@@ -173,11 +161,8 @@ function editLocalStorage(id, value) {
   });
   localStorage.setItem("list", JSON.stringify(items));
 }
-
 // SETUP LOCALSTORAGE.REMOVEITEM('LIST');
-
 // ****** setup items **********
-
 function setupItems() {
   let items = getLocalStorage();
 
@@ -213,6 +198,6 @@ function createListItem(id, value) {
   const editBtn = element.querySelector(".edit-btn");
   editBtn.addEventListener("click", editItem);
 
-  // append child
+  // ! append child
   list.appendChild(element);
 }
