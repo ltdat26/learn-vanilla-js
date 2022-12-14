@@ -1,6 +1,17 @@
 const Buttons = document.querySelectorAll(".btn")
 const CounterValue = document.getElementById("value")
-let count = 0
+let count = CounterValue.value
+
+let changeColors = (e) => {
+  if (e > 0) { CounterValue.style.color = "green" }
+  if (e < 0) { CounterValue.style.color = "red" }
+  if (e == 0) { CounterValue.style.color = "#222" }
+}
+
+CounterValue.onchange = () => {
+  count = CounterValue.value;
+  changeColors(CounterValue.value)
+}
 
 Buttons.forEach((btn) => {
   btn.addEventListener("click", (e) => {
@@ -9,20 +20,14 @@ Buttons.forEach((btn) => {
       count--
     } else if (styles.contains("increase")) {
       count++
+    } else if (styles.contains("multi")) {
+      count = count * 2
+    } else if (styles.contains("divide")) {
+      count = count / 2
     } else {
       count = 0
     }
-
-    if (count > 0) {
-      value.style.color = "green"
-    }
-    if (count < 0) {
-      value.style.color = "red"
-    }
-    if (count === 0) {
-      value.style.color = "#222"
-    }
-
-    value.textContent = count
+    changeColors(count)
+    CounterValue.value = count
   })
 })
